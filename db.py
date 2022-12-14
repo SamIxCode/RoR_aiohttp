@@ -1,6 +1,6 @@
 from sqlalchemy import create_engine, Column, Integer, String, DateTime
 from sqlalchemy.ext.declarative import declarative_base
-from dbsettings import postgresql as settings
+from settings import postgresql as settings
 from sqlalchemy.orm import sessionmaker
 Base = declarative_base()
 
