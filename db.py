@@ -1,4 +1,4 @@
-from sqlalchemy import create_engine, Column, Integer, String, DateTime
+from sqlalchemy import create_engine, Column, Integer, String, DateTime, JSON, BOOLEAN
 from sqlalchemy.ext.declarative import declarative_base
 from settings import postgresql as settings
 from sqlalchemy.orm import sessionmaker
@@ -13,10 +13,12 @@ class User(Base):
     password_digest = Column(String)
     created_at = Column(DateTime)
     updated_at = Column(DateTime)
+    sms_code = Column(JSON)
+    verified = Column(BOOLEAN)
 
 def get_engine(user,host,port,db):
     url = f"postgresql://{user}@{host}:{port}/{db}"
-    engine = create_engine(url, echo=False)
+    engine = create_engine(url, echo=True)
     return engine
 engine = get_engine(settings['pguser'],
                 settings["pghost"],

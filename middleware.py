@@ -1,4 +1,5 @@
 from aiohttp import web
+
 async def logger_middleware(app, handler):
     async def middleware_handler(request):
         print(f"Received request: {request.method} {request.path}")
@@ -7,7 +8,9 @@ async def logger_middleware(app, handler):
         except Exception as e:
             ''' Handle the exception and return a 500 Internal Server Error response'''
             print(f"Exception occurred: {e}")
-            response = web.Response(status=500)
+            response = web.json_response({
+                "error": "An unexpected error occurred"
+            }, status=500)
         print(f"Returning response: {response.status}")
         return response
 
